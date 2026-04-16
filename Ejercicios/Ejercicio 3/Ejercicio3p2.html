@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Motiva+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+   
+        :root {
+        --bg: #1a2a3d;
+        --bg2: #1a2a3d;
+        --bg3: #1a2a3d;
+        --nav-bg: #1a2a3d;
+        --surface: #2a3d4f;
+        --text: #cbd0db;
+        --muted: #4c6a7d;
+        --accent: #5c9eae;
+        --accent2: #4c6a7d;
+        --green: #27ae60;
+        }
+
+    body {
+      font-family: 'Motiva Sans', 'Arial', sans-serif;
+      background: var(--bg2);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    
+    header {
+      background: var(--nav-bg);
+      padding: 0 40px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0 8px;
+      border-bottom: 1px solid #2a3d4f;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .header-links a:hover { color: var(--accent); }
+
+    .btn-install {
+      background: var(--green);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    
+    nav.main-nav {
+      background: var(--nav-bg);
+      display: flex;
+      gap: 0;
+      padding: 0 40px;
+      border-bottom: 1px solid #2a3d4f;
+    }
+
+    nav.main-nav a {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav.main-nav a:hover,
+    nav.main-nav a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    
+    nav.sub-nav {
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      gap: 4px;
+      border-bottom: 1px solid #2a3d4f;
+    }
+
+    nav.sub-nav a {
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--text);
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+
+    nav.sub-nav a:hover { background: var(--surface); color: #fff; }
+
+    .sub-nav .search {
+      margin-left: auto;
+      display: flex;
+    }
+
+    .sub-nav input {
+      background: #000;
+      border: 1px solid #4c6a7d;
+      color: var(--text);
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 2px 0 0 2px;
+      outline: none;
+      width: 180px;
+    }
+
+    .sub-nav button {
+      background: var(--accent2);
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 0 2px 2px 0;
+      font-size: 12px;
+    }
+
+    
+    main { padding: 24px 40px; }
+
+    
+    .hero {
+      background: var(--surface);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: stretch;
+      min-height: 200px;
+    }
+
+    .hero-banner {
+      flex: 1;
+      background: linear-gradient(135deg, #1a3a5c 0%, #2d5a8e 50%, #1a3a5c 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(255,255,255,0.02) 20px,
+        rgba(255,255,255,0.02) 21px
+      );
+    }
+
+    .hero-event {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-sub {
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+
+    .hero-games {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      min-width: 220px;
+    }
+
+    .hero-game-card {
+      background: var(--bg2);
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .hero-game-card:hover { background: var(--bg3); }
+
+    .game-thumb {
+      width: 60px;
+      height: 36px;
+      background: var(--surface);
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .game-info { flex: 1; min-width: 0; }
+    .game-name { font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .price-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+    .discount { background: var(--green); color: #fff; font-size: 10px; font-weight: 700; padding: 1px 4px; border-radius: 1px; }
+    .price-old { font-size: 10px; color: var(--muted); text-decoration: line-through; }
+    .price-new { font-size: 11px; color: var(--accent); font-weight: 700; }
+
+    
+    .section { margin-bottom: 28px; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #2a3d4f;
+      padding-bottom: 8px;
+    }
+
+    .section-title { font-size: 16px; font-weight: 700; color: #fff; }
+    .section-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .ver-todo       { font-size: 11px; color: var(--accent); cursor: pointer; }
+    .ver-todo:hover { text-decoration: underline; }
+
+    
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .game-card {
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .game-card:hover { transform: translateY(-2px); }
+
+    .game-cover {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+  
+    .game-card:nth-child(1) .game-cover { background: #1a3d2b; }
+    .game-card:nth-child(2) .game-cover { background: #3d1a1a; }
+    .game-card:nth-child(3) .game-cover { background: #1a1a3d; }
+    .game-card:nth-child(4) .game-cover { background: #2d1a3d; }
+    .game-card:nth-child(5) .game-cover { background: #3d2d1a; }
+    .game-card:nth-child(6) .game-cover { background: #1a3d3d; }
+    .game-card:nth-child(7) .game-cover { background: #3d3d1a; }
+    .game-card:nth-child(8) .game-cover { background: #1a2d3d; }
+
+    .game-card-body { padding: 7px 8px 8px; }
+    .game-card-name { font-size: 12px; color: #fff; font-weight: 700; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .game-card .price-row { justify-content: flex-start; }
+
+   
+    footer {
+      background: var(--nav-bg);
+      border-top: 1px solid #2a3d4f;
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a { font-size: 11px; color: var(--muted); }
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy { font-size: 11px; color: #4a6a7d; }
+  </style>
+</head>
+<body>
+
+
+<header>
+  <div class="header-top">
+    <div class="logo">Steam</div>
+    <div class="header-links">
+      <a href="#">Iniciar sesión</a>
+      <a href="#">|</a>
+      <a href="#">Idioma</a>
+      <a href="#">|</a>
+      <a href="#" class="btn-install">Instalar Steam</a>
+    </div>
+  </div>
+</header>
+
+
+<nav class="main-nav">
+  <a href="#" class="active">Tienda</a>
+  <a href="#">Comunidad</a>
+  <a href="#">Acerca de</a>
+  <a href="#">Soporte</a>
+</nav>
+
+
+<nav class="sub-nav">
+  <a href="#">Explorar</a>
+  <a href="#">Recomendaciones</a>
+  <a href="#">Categorías</a>
+  <a href="#">Formas de jugar</a>
+  <a href="#">Misceláneos</a>
+  <div class="search">
+    <input type="text" placeholder="Buscar en la tienda...">
+    <button>🔍</button>
+  </div>
+</nav>
+
+
+<main>
+
+  
+  <div class="hero">
+    <div class="hero-banner">
+      <div class="hero-event">Rebajas de Primavera</div>
+      <div class="hero-sub">Desde ahora hasta el 26 de marzo · 18:00 hs</div>
+    </div>
+    <div class="hero-games">
+    <div class="hero-game-card">
+    <div class="game-thumb">JUEGO</div>
+    <div class="game-info">
+    <div class="game-name">Elden Ring: Nightreign</div>
+    <div class="price-row">
+        <span class="discount">-25%</span>
+        <span class="price-old">$21.040</span>
+        <span class="price-new">$15.780</span>
+    </div>
+    </div>
+    </div>
+
+    <div class="hero-game-card">
+    <div class="game-thumb">JUEGO</div>
+    <div class="game-info">
+    <div class="game-name">Risk of Rain 2</div>
+    <div class="price-row">
+        <span class="discount">-67%</span>
+        <span class="price-old">$5.376</span>
+        <span class="price-new">$1.774</span>
+    </div>
+    </div>
+    </div>
+
+    <div class="hero-game-card">
+    <div class="game-thumb">JUEGO</div>
+    <div class="game-info">
+    <div class="game-name">Anno 117: Pax Romana</div>
+    <div class="price-row">
+        <span class="discount">-25%</span>
+        <span class="price-old">$17.724</span>
+        <span class="price-new">$13.293</span>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+  
+  <section class="section">
+    <div class="section-header">
+    <div>
+    <div class="section-title">Grandes descuentos destacados</div>
+    <div class="section-sub">Grandes ofertas en algunos de los mejores juegos de todos los tiempos</div>
+    </div>
+      <a class="ver-todo">Ver todo</a>
+    </div>
+
+    <div class="games-grid">
+    <div class="game-card">
+    <div class="game-cover">portada</div>
+    <div class="game-card-body">
+    <div class="game-card-name">Nickelodeon All-Star Brawl 2</div>
+    <div class="price-row"><span class="discount">-95%</span><span class="price-old">$3.044</span><span class="price-new">$152</span></div>
+    </div>
+    </div>
+
+    <div class="game-card">
+    <div class="game-cover">portada</div>
+    <div class="game-card-body">
+    <div class="game-card-name">Resident Evil 3</div>
+    <div class="price-row"><span class="discount">-90%</span><span class="price-old">$2.130</span><span class="price-new">$213</span></div>
+    </div>
+    </div>
+
+    <div class="game-card">
+    <div class="game-cover">portada</div>
+    <div class="game-card-body">
+    <div class="game-card-name">Vampyr</div>
+    <div class="price-row"><span class="discount">-80%</span><span class="price-old">$3.190</span><span class="price-new">$638</span></div>
+    </div>
+    </div>
+
+    <div class="game-card">
+    <div class="game-cover">portada</div>
+    <div class="game-card-body">
+    <div class="game-card-name">The Witcher 3</div>
+    <div class="price-row"><span class="discount">-80%</span><span class="price-old">$3.172</span><span class="price-new">$634</span></div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+ 
+  <section class="section">
+    <div class="section-header">
+    <div>
+    <div class="section-title">Más juegos en oferta</div>
+    <div class="section-sub">Explorá toda la selección de juegos rebajados</div>
+    </div>
+    <a class="ver-todo">Ver todo</a>
+    </div>
+    <div class="games-grid">
+    <div class="game-card">
+    <div class="game-cover">portada</div>
+    <div class="game-card-body">
+    <div class="game-card-name">Horizon Zero Dawn</div>
+    <div class="price-row"><span class="discount">-33%</span><span class="price-old">$11.475</span><span class="price-new">$7.688</span></div>
+    </div>
+    </div>
+
+    <div class="game-card">
+        <div class="game-cover">portada</div>
+        <div class="game-card-body">
+        <div class="game-card-name">Ghost of Tsushima</div>
+        <div class="price-row"><span class="discount">-40%</span><span class="price-old">$10.333</span><span class="price-new">$6.200</span></div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-cover">portada</div>
+        <div class="game-card-body">
+        <div class="game-card-name">Disney Dreamlight Valley</div>
+        <div class="price-row"><span class="discount">-50%</span><span class="price-old">$3.805</span><span class="price-new">$1.902</span></div>
+      </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-cover">portada</div>
+        <div class="game-card-body">
+        <div class="game-card-name">RimWorld</div>
+        <div class="price-row"><span class="price-new">$10.450</span></div>
+        </div>
+        </div>
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="footer-links">
+    <a href="#">Acerca de Valve</a>
+    <a href="#">Empleos</a>
+    <a href="#">Distribuidores</a>
+    <a href="#">Privacidad</a>
+    <a href="#">Acuerdo de suscripción</a>
+    <a href="#">Reembolsos</a>
+    <a href="#">Cookies legales</a>
+    <a href="#">Contacto</a>
+  </div>
+  <div class="footer-copy">© 2026 Valve Corporation. Todos los derechos reservados.</div>
+</footer>
+
+</body>
+</html>
